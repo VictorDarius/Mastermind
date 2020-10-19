@@ -1,25 +1,21 @@
 #include <cstdlib>
-
 #include <iomanip>
-
 #include <iostream>
 
 using namespace std;
 
 int main(int argc, char ** argv) {
 
-    int guess1, guess2, guess3, guess4, rcrp, rcwp, option,
-            rightColorRightPlace, rightColorWrongPlace, numberOfSlots,
-            masterCodeInt, blackPegs, whitePegs;
+    int option, numberOfSlots, blackPegs, whitePegs;
 
-    bool gameOver = false;
-
+    //Opening Menu
     cout << "Welcome to Mastermind.\n";
     cout << "1. Easy (4 Slots)\n"
             "2. Medium (6 Slots)\n"
             "3. Hard (8 Slots)\n"
             "Choose an Option. (1-3): ";
 
+    //Set Difficulty (Number of slots for each guess)
     cin >> option;
 
     switch (option) {
@@ -50,14 +46,17 @@ int main(int argc, char ** argv) {
     cout << "Player 2: (CodeMaker) Enter an as a color representation of "
             "the Master Code.\n";
 
+    //Enter code one digit at a time
     for (int i = 0; i < numberOfSlots; i++) {
 
         cout << "Slot# " << i + 1 << endl;
         cin >> masterCode[i];
     }
 
+    //While all guesses are not correct, continue game
     while (blackPegs != numberOfSlots) {
 
+        //Enter code 1 digit at a time
         cout << "Player 1: (CodeBreaker) Enter a number as a color "
                 "representation for the corresponding slot.\n";
 
@@ -87,18 +86,13 @@ int main(int argc, char ** argv) {
                 if (playerGuess[i] == masterCode[j]) {
 
                     whitePegs++;
-
                 }
-
             }
-
         }
-
+        //For accurate representation of white pegs (no duplicates)
         whitePegs = whitePegs - blackPegs;
 
         cout << "White Pegs: " << whitePegs << endl;
-
-
         whitePegs = 0; // reset white pegs for next guess
 
         //Test Win Condition
